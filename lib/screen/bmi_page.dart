@@ -59,11 +59,11 @@ class _BMICalculatorState extends State<BMICalculator> {
             Row(
               children: [
                 Expanded(
-                  child: _buildGenderButton('Male'),
+                  child: _buildGenderButton('Male', Icons.male),
                 ),
                 SizedBox(width: 16.0),
                 Expanded(
-                  child: _buildGenderButton('Female'),
+                  child: _buildGenderButton('Female', Icons.female),
                 ),
               ],
             ),
@@ -99,7 +99,7 @@ class _BMICalculatorState extends State<BMICalculator> {
     );
   }
 
-  Widget _buildGenderButton(String gender) {
+  Widget _buildGenderButton(String gender, IconData icon) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -114,14 +114,23 @@ class _BMICalculatorState extends State<BMICalculator> {
               : (_isDarkMode ? Colors.grey.shade800 : Colors.grey.shade300),
           borderRadius: BorderRadius.circular(8.0),
         ),
-        child: Center(
-          child: Text(
-            gender,
-            style: TextStyle(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 50,
               color: Colors.white,
-              fontWeight: FontWeight.bold,
             ),
-          ),
+            SizedBox(height: 8),
+            Text(
+              gender,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );
