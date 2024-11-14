@@ -3,7 +3,7 @@ import 'calculator_page.dart';
 import 'bmi_page.dart';
 import 'temperature_converter_page.dart';
 import 'percentage_calculator_page.dart';
-import 'time_calculator_page.dart';
+import 'stopwatch.dart'; // Mengimpor StopwatchPage
 import 'calorie_calculator_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,10 +22,10 @@ class HomePage extends StatelessWidget {
           children: [
             _buildMenuButton(context, 'Kalkulator Sederhana', Icons.calculate, CalculatorPage()),
             _buildMenuButton(context, 'Kalkulator BMI', Icons.monitor_weight, BMICalculator()),
-           // _buildMenuButton(context, 'Konversi Suhu', Icons.thermostat, TemperatureConverterPage()),
-            //_buildMenuButton(context, 'Kalkulator Persentase', Icons.percent, PercentageCalculatorPage()),
-            //_buildMenuButton(context, 'Kalkulator Waktu', Icons.timer, TimeCalculatorPage()),
-            //_buildMenuButton(context, 'Kalkulator Kalori', Icons.local_dining, CalorieCalculatorPage()),
+            // _buildMenuButton(context, 'Konversi Suhu', Icons.thermostat, TemperatureConverterPage()),
+            // _buildMenuButton(context, 'Kalkulator Persentase', Icons.percent, PercentageCalculatorPage()),
+            _buildMenuButton(context, 'Stopwatch', Icons.timer, StopwatchPage()), // Mengganti TimeCalculatorPage dengan StopwatchPage
+            // _buildMenuButton(context, 'Kalkulator Kalori', Icons.local_dining, CalorieCalculatorPage()),
           ],
         ),
       ),
