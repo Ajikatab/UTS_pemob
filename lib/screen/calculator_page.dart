@@ -167,7 +167,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF202020),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF202020),
+        backgroundColor: const Color.fromARGB(255, 247, 247, 247),
         title: const Text('Standard'),
         centerTitle: true, // Menengahkan judul
       ),

@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             _buildMenuButton(context, 'Konversi Suhu', Icons.thermostat, TemperatureConverterPage()),
             // _buildMenuButton(context, 'Kalkulator Persentase', Icons.percent, PercentageCalculatorPage()),
             _buildMenuButton(context, 'Stopwatch', Icons.timer, StopwatchPage()), // Mengganti TimeCalculatorPage dengan StopwatchPage
-            // _buildMenuButton(context, 'Kalkulator Kalori', Icons.local_dining, CalorieCalculatorPage()),
+            _buildMenuButton(context, 'Kalkulator Kalori', Icons.local_dining, CalorieCalculatorPage()),
           ],
         ),
       ),
