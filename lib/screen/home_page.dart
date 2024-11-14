@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
           children: [
             _buildMenuButton(context, 'Kalkulator Sederhana', Icons.calculate, CalculatorPage()),
             _buildMenuButton(context, 'Kalkulator BMI', Icons.monitor_weight, BMICalculator()),
-            // _buildMenuButton(context, 'Konversi Suhu', Icons.thermostat, TemperatureConverterPage()),
+            _buildMenuButton(context, 'Konversi Suhu', Icons.thermostat, TemperatureConverterPage()),
             // _buildMenuButton(context, 'Kalkulator Persentase', Icons.percent, PercentageCalculatorPage()),
             _buildMenuButton(context, 'Stopwatch', Icons.timer, StopwatchPage()), // Mengganti TimeCalculatorPage dengan StopwatchPage
             // _buildMenuButton(context, 'Kalkulator Kalori', Icons.local_dining, CalorieCalculatorPage()),
