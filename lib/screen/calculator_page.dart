@@ -11,7 +11,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   String _currentNumber = "";
   List<String> _expression = [];
   bool _newNumber = true;
-  
+
   double _calculateExpression(List<String> expr) {
     List<String> tempExpr = [];
     for (int i = 0; i < expr.length; i++) {
@@ -64,10 +64,28 @@ class _CalculatorPageState extends State<CalculatorPage> {
   void _buttonPressed(String buttonText) {
     setState(() {
       if (buttonText == "C") {
+        // Menghapus seluruh ekspresi dan angka
         _output = "0";
         _currentNumber = "";
         _expression = [];
         _newNumber = true;
+      } else if (buttonText == "⌫") {
+        // Penghapusan satu karakter
+        if (_currentNumber.isNotEmpty) {
+          // Jika ada angka yang sedang diketik, hapus satu karakter
+          _currentNumber = _currentNumber.substring(0, _currentNumber.length - 1);
+          _output = _currentNumber.isEmpty ? "0" : _currentNumber;
+        } else if (_expression.isNotEmpty) {
+          // Jika tidak ada angka yang diketik, hapus operator atau angka terakhir dari ekspresi
+          String last = _expression.removeLast();
+          if (_expression.isNotEmpty) {
+            _output = _formatExpression();
+            _currentNumber = _expression.last;
+          } else {
+            _output = "0";
+            _currentNumber = "";
+          }
+        }
       } else if (buttonText == "+" || buttonText == "-" ||
           buttonText == "×" || buttonText == "÷") {
         if (_currentNumber.isNotEmpty) {
@@ -88,7 +106,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         if (_expression.isNotEmpty) {
           double result = _calculateExpression(_expression);
           _output = _formatNumber(result.toString());
-          _currentNumber = _output;
+          _currentNumber = _output;  // Memastikan output disalin ke _currentNumber
           _expression = [];
           _newNumber = true;
         }
@@ -192,6 +210,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               Row(
                 children: [
                   _buildButton("C"),
+                  _buildButton("⌫"), // Menambahkan tombol "⌫" untuk penghapusan satu karakter
                 ],
               ),
               Row(

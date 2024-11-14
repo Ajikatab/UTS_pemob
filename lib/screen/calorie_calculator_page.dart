@@ -1,66 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import 'show_calorie.dart'; // Import untuk halaman hasil
 
 class CalorieCalculatorPage extends StatefulWidget {
   @override
   _CalorieCalculatorPageState createState() => _CalorieCalculatorPageState();
-}
-
-// Custom painter untuk membuat gauge
-class CalorieGaugePainter extends CustomPainter {
-  final double value;
-  final double maxValue;
-
-  CalorieGaugePainter({required this.value, this.maxValue = 3000});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height * 0.7); // Letakkan lebih rendah
-    final radius = size.width * 0.3; // Perkecil radius
-
-    // Background arc (grey)
-    final backgroundPaint = Paint()
-      ..color = Colors.grey[300]!
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 15; // Kurangi lebar stroke
-
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      math.pi,
-      math.pi,
-      false,
-      backgroundPaint,
-    );
-
-    // Calculate color based on value
-    Color gaugeColor;
-    if (value < maxValue * 0.5) {
-      gaugeColor = Colors.yellow;
-    } else if (value < maxValue * 0.75) {
-      gaugeColor = Colors.green;
-    } else {
-      gaugeColor = Colors.red;
-    }
-
-    // Value arc
-    final valuePaint = Paint()
-      ..color = gaugeColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 15 // Kurangi lebar stroke
-      ..strokeCap = StrokeCap.round;
-
-    final valueAngle = (value / maxValue) * math.pi;
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      math.pi,
-      valueAngle,
-      false,
-      valuePaint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
 
 class _CalorieCalculatorPageState extends State<CalorieCalculatorPage> {
@@ -200,49 +143,16 @@ class _CalorieCalculatorPageState extends State<CalorieCalculatorPage> {
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 16),
               ),
-              onPressed: _calculateCalories,
-              child: Text('Hitung Kalori'),
-            ),
-            SizedBox(height: 24),
-
-            if (_calories > 0)
-              AspectRatio(
-                aspectRatio: 1.5,
-                child: CustomPaint(
-                  painter: CalorieGaugePainter(value: _calories),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${_calories.toStringAsFixed(0)}',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Calories',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'To start losing weight',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
-                    ),
+              onPressed: () {
+                _calculateCalories();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShowCaloriePage(calories: _calories),
                   ),
-                ),
-              ),
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                'Ini adalah perkiraan kalori yang dibutuhkan untuk mempertahankan berat badan Anda.',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+                );
+              },
+              child: Text('Show Result'),
             ),
           ],
         ),
